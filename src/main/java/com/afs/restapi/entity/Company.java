@@ -2,6 +2,7 @@ package com.afs.restapi.entity;
 
 import javax.persistence.*;
 import java.util.List;
+
 @Entity
 public class Company {
     @Id
@@ -14,6 +15,7 @@ public class Company {
 
     public Company() {
     }
+
     public Company(String name) {
         this.name = name;
     }
