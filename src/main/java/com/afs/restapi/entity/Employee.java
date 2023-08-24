@@ -7,14 +7,18 @@ import javax.persistence.Id;
 
 @Entity
 public class Employee {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer age;
     private String gender;
     private Integer salary;
     private Long companyId;
+    private static final Integer MIN_VALID_AGE = 18;
+
+    private Boolean active;
 
     public Employee() {
     }
@@ -55,6 +59,13 @@ public class Employee {
         return name;
     }
 
+    public boolean hasInvalidAge() {
+        return getAge() < MIN_VALID_AGE ;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
     public Integer getAge() {
         return age;
     }

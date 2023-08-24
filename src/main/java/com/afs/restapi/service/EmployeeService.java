@@ -1,6 +1,7 @@
 package com.afs.restapi.service;
 
 import com.afs.restapi.entity.Employee;
+import com.afs.restapi.exception.EmployeeCreateException;
 import com.afs.restapi.exception.EmployeeNotFoundException;
 import com.afs.restapi.repository.EmployeeJpaRepository;
 import com.afs.restapi.repository.InMemoryEmployeeRepository;
@@ -43,6 +44,9 @@ public class EmployeeService {
     }
 
     public Employee create(Employee employee) {
+        if(employee.hasInvalidAge()){
+            throw new EmployeeCreateException();
+        }
         return employeeJpaRepository.save(employee);
     }
 
