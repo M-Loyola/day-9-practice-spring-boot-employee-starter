@@ -8,6 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -165,21 +168,23 @@ class EmployeeServiceTest {
         assertEquals("Employee is inactive", employeeUpdateException.getMessage());
     }
 
-//    @Test
-//    void should_paged_employees_when_get_employees_by_page_given_employee_service_and_pageNumber_and_pageSize() {
-//        // Given
-//        Employee alice = new Employee(null, "Alice", 24, "Female", 9000);
-//        List<Employee> employees = List.of(alice);
-//        when(mockedEmployeeRepository.listEmployeesByPage(anyLong(), anyLong())).thenReturn(employees);
-//
-//        // When
-//        List<Employee> pagedEmployees = employeeService.getEmployeesByPage(1L, 1L);
-//
-//        // Then
-//        assertEquals(pagedEmployees.get(0).getId(), alice.getId());
-//        assertEquals(pagedEmployees.get(0).getName(), alice.getName());
-//        assertEquals(pagedEmployees.get(0).getAge(), alice.getAge());
-//        assertEquals(pagedEmployees.get(0).getGender(), alice.getGender());
-//        assertEquals(pagedEmployees.get(0).getSalary(), alice.getSalary());
-//    }
+    @Test
+    void should_paged_employees_when_get_employees_by_page_given_employee_service_and_pageNumber_and_pageSize() {
+        // Given
+        Employee alice = new Employee(null, "Alice", 24, "Female", 9000);
+        List<Employee> employees = List.of(alice);
+        Page<Employee> page = new PageImpl<>(employees); // Create a Page object with the employees
+        when(employeeJpaRepository.findAll(any(PageRequest.class))).thenReturn(page); // Use any(PageRequest.class) to match any PageRequest
+
+        // When
+        List<Employee> pagedEmployees = employeeService.findByPage(1, 1);
+
+        // Then
+        assertEquals(pagedEmployees.get(0).getId(), alice.getId());
+        assertEquals(pagedEmployees.get(0).getName(), alice.getName());
+        assertEquals(pagedEmployees.get(0).getAge(), alice.getAge());
+        assertEquals(pagedEmployees.get(0).getGender(), alice.getGender());
+        assertEquals(pagedEmployees.get(0).getSalary(), alice.getSalary());
+    }
+
 }
