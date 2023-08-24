@@ -26,7 +26,7 @@ public class CompanyService {
     }
 
     public List<Company> findByPage(Integer pageNumber, Integer pageSize) {
-        return companyJpaRepository.findAll(PageRequest.of(pageNumber-1,pageSize)).toList();
+        return companyJpaRepository.findAll(PageRequest.of(pageNumber - 1, pageSize)).toList();
     }
 
     public Company findById(Long id) {
