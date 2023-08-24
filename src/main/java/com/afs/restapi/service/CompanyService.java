@@ -33,10 +33,11 @@ public class CompanyService {
         return companyJpaRepository.findById(id).orElseThrow(CompanyNotFoundException::new);
     }
 
-    public void update(Long id, Company company) {
+    public Company update(Long id, Company company) {
         Company toBeUpdatedCompany = findById(id);
         toBeUpdatedCompany.setName(company.getName());
         companyJpaRepository.save(toBeUpdatedCompany);
+        return toBeUpdatedCompany;
     }
 
     public Company create(Company company) {

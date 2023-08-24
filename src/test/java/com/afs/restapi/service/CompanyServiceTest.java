@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -84,5 +85,20 @@ public class CompanyServiceTest {
         // Then
         assertEquals(savedCompany.getId(), companyResponse.getId());
         assertEquals("JavaCom", companyResponse.getName());
+    }
+    @Test
+    void should_return_updated_company_when_update_given_company() {
+        // Given
+        Company company = new Company(1L, "JavaCom");
+        Company updatedCompanyInfo = new Company(1L, "Spring Boot Com");
+        when(mockedCompanyRepository.findById(company.getId())).thenReturn(Optional.of(company));
+        when(mockedCompanyRepository.save(any(Company.class))).thenReturn(updatedCompanyInfo);
+
+        // When
+        Company updatedCompany = companyService.update(company.getId(), updatedCompanyInfo);
+
+        // Then
+        assertEquals(updatedCompanyInfo.getId(), updatedCompany.getId());
+        assertEquals(updatedCompanyInfo.getName(), updatedCompany.getName());
     }
 }
