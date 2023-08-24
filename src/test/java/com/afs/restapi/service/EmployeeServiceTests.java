@@ -165,7 +165,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void should_paged_employees_when_get_employees_by_page_given_employee_service_and_pageNumber_and_pageSize() {
+    void should_return_page_of_employees_when_get_employees_by_page_given_employee_service_and_pageNumber_and_pageSize() {
         // Given
         Employee alice = new Employee(null, "Alice", 24, "Female", 9000);
         List<Employee> employees = List.of(alice);
