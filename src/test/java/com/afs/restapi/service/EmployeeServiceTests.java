@@ -49,7 +49,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void should_return_the_employee_when_get_employee_given_employee_service_and_an_employee_id() {
+    void should_return_employee_when_get_employee_given_employee_service_and_employee_id() {
         // Given
         Employee employee = new Employee(1L, "Lucy", 20, "Female", 3000);
         when(employeeJpaRepository.findById(employee.getId())).thenReturn(java.util.Optional.of(employee));
@@ -66,7 +66,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void should_return_employees_by_given_gender_when_get_employees_given_employee_service() {
+    void should_return_employees_by_gender_when_get_employees_given_employee_service() {
         // Given
         Employee alice = new Employee(null, "Alice", 24, "Female", 9000);
         List<Employee> employees = List.of(alice);
@@ -85,7 +85,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void should_return_created_active_employee_when_create_given_employee_service_and_employee_with_valid_age() {
+    void should_return_employee_with_active_status_when_create_given_employee_service_and_employee_with_valid_age() {
         // Given
         Employee employee = new Employee(null, "Lucy", 20, "Female", 3000);
         Employee savedEmployee = new Employee(1L, "Lucy", 20, "Female", 3000);
@@ -110,7 +110,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void should_throw_exception_when_create_given_employee_service_and_employee_whose_age_is_less_than_18() {
+    void should_throw_exception_when_create_given_employee_service_and_employee_with_age_less_than_18() {
         // Given
         Employee employee = new Employee(null, "Lucy", 16, "Female", 3000);
 
