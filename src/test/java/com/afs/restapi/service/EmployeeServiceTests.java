@@ -173,8 +173,8 @@ class EmployeeServiceTest {
         // Given
         Employee alice = new Employee(null, "Alice", 24, "Female", 9000);
         List<Employee> employees = List.of(alice);
-        Page<Employee> page = new PageImpl<>(employees); // Create a Page object with the employees
-        when(employeeJpaRepository.findAll(any(PageRequest.class))).thenReturn(page); // Use any(PageRequest.class) to match any PageRequest
+        Page<Employee> page = new PageImpl<>(employees);
+        when(employeeJpaRepository.findAll(any(PageRequest.class))).thenReturn(page);
 
         // When
         List<Employee> pagedEmployees = employeeService.findByPage(1, 1);
