@@ -15,22 +15,22 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CompanyServiceTest {
+class CompanyServiceTest {
     private CompanyService companyService;
-    private CompanyJpaRepository mockedCompanyRepository;
-    private EmployeeJpaRepository mockedEmployeeRepository;
+    private CompanyJpaRepository companyJpaRepository;
+    private EmployeeJpaRepository employeeJpaRepository;
     @BeforeEach
     void setUp() {
-        mockedCompanyRepository = mock(CompanyJpaRepository.class);
-        mockedEmployeeRepository = mock(EmployeeJpaRepository.class);
-        companyService = new CompanyService(mockedCompanyRepository, mockedEmployeeRepository);
+        companyJpaRepository = mock(CompanyJpaRepository.class);
+        employeeJpaRepository = mock(EmployeeJpaRepository.class);
+        companyService = new CompanyService(companyJpaRepository, employeeJpaRepository);
     }
     @Test
     void should_return_all_companies_when_get_companies_given_companies_service() {
         // Given
         Company company = new Company("JavaCom");
         List<Company> companies = List.of(company);
-        when(mockedCompanyRepository.findAll()).thenReturn(companies);
+        when(companyJpaRepository.findAll()).thenReturn(companies);
 
         // When
         List<Company> allCompanies = companyService.findAll();
@@ -43,7 +43,7 @@ public class CompanyServiceTest {
     void should_return_company_when_get_company_given_company_service_and_company_id() {
         // Given
         Company company = new Company("JavaCom");
-        when(mockedCompanyRepository.findById(company.getId())).thenReturn(Optional.of(company));
+        when(companyJpaRepository.findById(company.getId())).thenReturn(Optional.of(company));
 
         // When
         Company foundCompany = companyService.findById(company.getId());
@@ -60,7 +60,7 @@ public class CompanyServiceTest {
         alice.setCompanyId(company.getId());
 
         List<Employee> employees = List.of(alice);
-        when(mockedEmployeeRepository.findByCompanyId(company.getId())).thenReturn(employees);
+        when(employeeJpaRepository.findByCompanyId(company.getId())).thenReturn(employees);
 
         // When
         List<Employee> foundEmployees = companyService.findEmployeesByCompanyId(company.getId());
@@ -77,7 +77,7 @@ public class CompanyServiceTest {
         // Given
         Company company = new Company("JavaCom");
         Company savedCompany = new Company(1L, "JavaCom");
-        when(mockedCompanyRepository.save(company)).thenReturn(savedCompany);
+        when(companyJpaRepository.save(company)).thenReturn(savedCompany);
 
         // When
         Company companyResponse = companyService.create(company);
@@ -91,8 +91,8 @@ public class CompanyServiceTest {
         // Given
         Company company = new Company(1L, "JavaCom");
         Company updatedCompanyInfo = new Company(1L, "Spring Boot Com");
-        when(mockedCompanyRepository.findById(company.getId())).thenReturn(Optional.of(company));
-        when(mockedCompanyRepository.save(any(Company.class))).thenReturn(updatedCompanyInfo);
+        when(companyJpaRepository.findById(company.getId())).thenReturn(Optional.of(company));
+        when(companyJpaRepository.save(any(Company.class))).thenReturn(updatedCompanyInfo);
 
         // When
         Company updatedCompany = companyService.update(company.getId(), updatedCompanyInfo);
