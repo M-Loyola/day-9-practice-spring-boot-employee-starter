@@ -17,7 +17,6 @@ public class Employee {
     private Integer salary;
     private Long companyId;
     private static final Integer MIN_VALID_AGE = 18;
-
     private Boolean active;
 
     public Employee() {
