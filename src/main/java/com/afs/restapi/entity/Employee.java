@@ -87,7 +87,7 @@ public class Employee {
     }
 
     public Boolean isInactive() {
-        return active != null && !active;
+        return Boolean.FALSE.equals(active);
     }
 
 }
