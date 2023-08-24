@@ -161,9 +161,7 @@ class EmployeeServiceTest {
         when(employeeJpaRepository.findById(employee.getId())).thenReturn(Optional.of(employee));
 
         // When, Then
-        assertThrows(EmployeeUpdateException.class, () -> {
-            employeeService.update(employee.getId(), updatedEmployeeInfo);
-        }, "Employee is inactive");
+        assertThrows(EmployeeUpdateException.class, () -> employeeService.update(employee.getId(), updatedEmployeeInfo), "Employee is inactive");
     }
 
     @Test
