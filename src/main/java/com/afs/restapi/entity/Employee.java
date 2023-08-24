@@ -85,4 +85,12 @@ public class Employee {
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
+    public Boolean isActive() {
+        return active;
+    }
+
+    public Boolean isInactive() {
+        return active != null && !active;
+    }
+
 }
