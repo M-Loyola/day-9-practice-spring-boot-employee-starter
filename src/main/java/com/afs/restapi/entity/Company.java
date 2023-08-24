@@ -1,7 +1,5 @@
 package com.afs.restapi.entity;
 
-import jdk.jfr.Enabled;
-
 import javax.persistence.*;
 import java.util.List;
 @Entity
