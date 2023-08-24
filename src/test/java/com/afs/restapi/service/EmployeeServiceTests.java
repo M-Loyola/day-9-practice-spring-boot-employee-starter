@@ -3,6 +3,7 @@ package com.afs.restapi.service;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.exception.EmployeeCreateException;
 import com.afs.restapi.exception.EmployeeUpdateException;
+import com.afs.restapi.repository.CompanyJpaRepository;
 import com.afs.restapi.repository.EmployeeJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,9 +28,10 @@ class EmployeeServiceTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        employeeJpaRepository = mock(EmployeeJpaRepository.class);
         employeeService = new EmployeeService(employeeJpaRepository);
     }
+
     @Test
     void should_return_all_employees_when_get_employees_given_employee_service() {
         // Given
