@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer age;
@@ -60,12 +60,13 @@ public class Employee {
     }
 
     public boolean hasInvalidAge() {
-        return getAge() < MIN_VALID_AGE ;
+        return getAge() < MIN_VALID_AGE;
     }
 
     public void setActive(Boolean active) {
         this.active = active;
     }
+
     public Integer getAge() {
         return age;
     }
