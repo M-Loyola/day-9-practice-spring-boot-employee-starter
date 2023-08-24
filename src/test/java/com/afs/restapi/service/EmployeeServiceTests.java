@@ -153,7 +153,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void should_throw_exception_when_update_given_employee_service_and_inactive_employee_and_age_and_salary() {
+    void should_throw_exception_when_update_given_employee_service_and_employee_with_inactive_status_and_age_and_salary() {
         // Given
         Employee employee = new Employee(null, "Lucy", 20, "Female", 3000);
         employee.setActive(Boolean.FALSE);
