@@ -31,7 +31,6 @@ public class CompanyService {
 
     public Company findById(Long id) {
         Company company = companyJpaRepository.findById(id).orElseThrow(CompanyNotFoundException::new);
-        companyJpaRepository.save(company);
         return company;
     }
 
