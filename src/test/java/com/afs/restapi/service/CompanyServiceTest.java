@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -35,5 +36,18 @@ public class CompanyServiceTest {
         // Then
         assertEquals(allCompanies.get(0).getId(), company.getId());
         assertEquals(allCompanies.get(0).getName(), company.getName());
+    }
+    @Test
+    void should_return_company_when_get_company_given_company_service_and_company_id() {
+        // Given
+        Company company = new Company("JavaCom");
+        when(mockedCompanyRepository.findById(company.getId())).thenReturn(Optional.of(company));
+
+        // When
+        Company foundCompany = companyService.findById(company.getId());
+
+        // Then
+        assertEquals(company.getId(), foundCompany.getId());
+        assertEquals(company.getName(), foundCompany.getName());
     }
 }
