@@ -120,7 +120,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void should_return_inactive_employee_when_delete_given_employee_service_and_active_employee() {
+    void should_return_employee_with_inactive_status_when_delete_given_employee_service_and_active_employee() {
         // Given
         Employee employee = new Employee(null, "Lucy", 20, "Female", 3000);
         employee.setActive(Boolean.TRUE);
