@@ -14,7 +14,7 @@ public class EmployeeService {
 
     private final EmployeeJpaRepository employeeJpaRepository;
 
-    public EmployeeService(InMemoryEmployeeRepository inMemoryEmployeeRepository, EmployeeJpaRepository employeeJpsRepository) {
+    public EmployeeService(EmployeeJpaRepository employeeJpsRepository) {
         this.employeeJpaRepository = employeeJpsRepository;
     }
 
