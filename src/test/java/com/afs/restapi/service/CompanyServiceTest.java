@@ -19,12 +19,14 @@ class CompanyServiceTest {
     private CompanyService companyService;
     private CompanyJpaRepository companyJpaRepository;
     private EmployeeJpaRepository employeeJpaRepository;
+
     @BeforeEach
     void setUp() {
         companyJpaRepository = mock(CompanyJpaRepository.class);
         employeeJpaRepository = mock(EmployeeJpaRepository.class);
         companyService = new CompanyService(companyJpaRepository, employeeJpaRepository);
     }
+
     @Test
     void should_return_all_companies_when_get_companies_given_companies_service() {
         // Given
@@ -39,6 +41,7 @@ class CompanyServiceTest {
         assertEquals(allCompanies.get(0).getId(), company.getId());
         assertEquals(allCompanies.get(0).getName(), company.getName());
     }
+
     @Test
     void should_return_company_when_get_company_given_company_service_and_company_id() {
         // Given
@@ -52,13 +55,13 @@ class CompanyServiceTest {
         assertEquals(company.getId(), foundCompany.getId());
         assertEquals(company.getName(), foundCompany.getName());
     }
+
     @Test
     void should_return_employees_company_when_get_find_employees_by_company_id_given_company_service() {
         // Given
         Company company = new Company(1L, "JavaCom");
         Employee alice = new Employee(1L, "Sam", 24, "Female", 9000);
         alice.setCompanyId(company.getId());
-
         List<Employee> employees = List.of(alice);
         when(employeeJpaRepository.findByCompanyId(company.getId())).thenReturn(employees);
 
@@ -72,6 +75,7 @@ class CompanyServiceTest {
         assertEquals(foundEmployees.get(0).getGender(), alice.getGender());
         assertEquals(foundEmployees.get(0).getSalary(), alice.getSalary());
     }
+
     @Test
     void should_return_company_when_create_given_company_service_and_company() {
         // Given
@@ -86,6 +90,7 @@ class CompanyServiceTest {
         assertEquals(savedCompany.getId(), companyResponse.getId());
         assertEquals("JavaCom", companyResponse.getName());
     }
+
     @Test
     void should_return_updated_company_when_update_given_company() {
         // Given
