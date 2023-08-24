@@ -27,7 +27,7 @@ class EmployeeServiceTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         employeeService = new EmployeeService(employeeJpaRepository);
     }
     @Test
