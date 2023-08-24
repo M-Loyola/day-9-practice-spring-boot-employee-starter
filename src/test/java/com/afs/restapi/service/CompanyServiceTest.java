@@ -71,4 +71,18 @@ public class CompanyServiceTest {
         assertEquals(foundEmployees.get(0).getGender(), alice.getGender());
         assertEquals(foundEmployees.get(0).getSalary(), alice.getSalary());
     }
+    @Test
+    void should_return_company_when_create_given_company_service_and_company() {
+        // Given
+        Company company = new Company("JavaCom");
+        Company savedCompany = new Company(1L, "JavaCom");
+        when(mockedCompanyRepository.save(company)).thenReturn(savedCompany);
+
+        // When
+        Company companyResponse = companyService.create(company);
+
+        // Then
+        assertEquals(savedCompany.getId(), companyResponse.getId());
+        assertEquals("JavaCom", companyResponse.getName());
+    }
 }
