@@ -115,9 +115,7 @@ class EmployeeServiceTest {
         Employee employee = new Employee(null, "Lucy", 16, "Female", 3000);
 
         // When, Then
-        EmployeeCreateException employeeCreateException = assertThrows(EmployeeCreateException.class, () -> {
-            employeeService.create(employee);
-        });
+        EmployeeCreateException employeeCreateException = assertThrows(EmployeeCreateException.class, () -> employeeService.create(employee));
         assertEquals("Employee must be 18-65 years old", employeeCreateException.getMessage());
     }
 
@@ -163,9 +161,9 @@ class EmployeeServiceTest {
         when(employeeJpaRepository.findById(employee.getId())).thenReturn(Optional.of(employee));
 
         // When, Then
-        EmployeeUpdateException employeeUpdateException = assertThrows(EmployeeUpdateException.class, () ->
-                employeeService.update(employee.getId(), updatedEmployeeInfo));
-        assertEquals("Employee is inactive", employeeUpdateException.getMessage());
+        assertThrows(EmployeeUpdateException.class, () -> {
+            employeeService.update(employee.getId(), updatedEmployeeInfo);
+        }, "Employee is inactive");
     }
 
     @Test
